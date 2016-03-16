@@ -1,0 +1,68 @@
+<ion-view title="{{'CONFIRM_ORDER_LABEL' | translate}}">
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-outline button-dark" ng-click="submitOrder()">
+          {{'SUBMIT_ORDER_LABEL' | translate}}
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content>
+
+        <div class="container order-header">
+            <form>
+                <div class="left-col">
+                    <label class="item item-input header-item">
+                          <input type="text" placeholder="{{'ORDER_NAME_LABEL' | translate}}" ng-model="formfields.orderName">
+                    </label>
+                    <label class="item item-input header-item">
+                        <span class="input-label">{{'CLOSE_DATE_LABEL' | translate}}:&nbsp</span>
+                        <input type="date" ng-model="formfields.closeDate">
+                    </label>
+                    <label class="item item-input header-item">
+                        <input type="text" placeholder="{{'ORDER_DESCRIPTION_LABEL' | translate}}"  ng-model="formfields.orderDesc">
+                    </label>
+                </div>
+                <div class="right-col">
+                    <label class="item item-input header-item">
+                        <span class="input-label">{{'ACCOUNT_NAME_LABEL' | translate}}:&nbsp</span>
+                        <input type="text" value="{{formfields.accountName}}" readonly>
+                    </label>
+                    <label class="item item-input header-item">
+                        <span class="input-label">{{'STAGE_LABEL' | translate}}:&nbsp</span>
+                        <input type="text" value="{{formfields.stageName}}" readonly>
+                    </label>
+                    <label class="item item-input header-item">
+                        <span class="input-label">{{'AMOUNT_LABEL' | translate}}:&nbsp</span>
+                        <input type="text" value="${{formfields.orderTotal}}" readonly>
+                    </label>
+                </div>
+            </form>
+        </div>
+
+        <!-- Below is the list of products ordered.  This is "Done"... -->
+        
+        <div class="flex-container">
+            <header class="row header responsive-lg">
+                <div class="col flex-item"></div>
+                <div class="col flex-item">{{'PRODUCT_NAME_LABEL' | translate}}</div>
+                <div class="col flex-item">{{'INVENTORY_LABEL' | translate}}</div>
+                <div class="col flex-item">{{'UNIT_PRICE_LABEL' | translate}}</div>
+                <div class="col flex-item">{{'ORDER_QUANTITY_LABEL' | translate}}</div>
+                <div class="col flex-item">{{'DISCOUNT_AMOUNT_LABEL' | translate}}</div>
+                <div class="col flex-item">{{'TOTAL_LABEL' | translate}}</div>
+            </header>
+            <div class="row responsive-lg"  ng-repeat="product in products">
+                <div class="col flex-item"><img src="{{product.invFlag}}"/></div>
+                <div class="col flex-item">{{product.Name}}</div>
+                <div class="col flex-item">{{product.inventoryAmt__c}}</div>
+                <div class="col flex-item">${{product.UnitPrice}}</div>
+                <div class="col flex-item">{{product.OrderQty}}</div>
+                <div class="col flex-item">${{product.DiscountAmt}}</div>
+                <div class="col flex-item">${{product.Total}}</div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

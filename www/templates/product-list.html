@@ -1,0 +1,47 @@
+<ion-view title="{{ 'PRODUCT_LIST_HEADER' | translate}}">
+
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <button class="button button-outline button-dark" ng-click="confirmOrder()">
+          {{'CONFIRM_ORDER_LABEL' | translate}}
+        </button>
+    </ion-nav-buttons>
+
+    <ion-content class="has-header" overflow-scroll="true">
+        <label class="item item-input">
+            <i class="icon ion-search placeholder-icon"></i>
+            <input type="text" placeholder="{{'SEARCH_LABEL' | translate}}" ng-model="searchText">
+        </label>
+
+        <form>
+            <div class="flex-container">
+                <header class="row header responsive-lg">
+                    <div class="col flex-item"></div>
+                    <div class="col flex-item">{{'PRODUCT_NAME_LABEL' | translate}}</div>
+                    <div class="col flex-item">{{'PRODUCT_CODE_LABEL' | translate}}</div>
+                    <div class="col flex-item">{{'INVENTORY_LABEL' | translate}}</div>
+                    <div class="col flex-item">{{'UNIT_PRICE_LABEL' | translate}}</div>
+                    <div class="col flex-item">{{'DISCOUNT_LABEL' | translate}} %</div>
+                    <div class="col flex-item">{{'ORDER_LABEL' | translate}}</div>
+                </header>
+                <div class="row responsive-lg"  ng-repeat="product in products | filter:searchText track by product.Id">
+                    <div class="col flex-item"><img src="{{product.invFlag}}"/></div>
+                    <div class="col flex-item">{{product.Name}}</div>
+                    <div class="col flex-item">{{product.ProductCode}}</div>
+                    <div class="col flex-item">{{product.inventoryAmt__c}}</div>
+                    <div class="col flex-item">${{product.UnitPrice}}</div>
+                    <div class="col flex-item">{{product.Discount__c}}</div>
+                    <div class="col flex-item">
+                        <label class="item item-input">
+                              <input type="number" placeholder="{{'QUANTITY_LABEL' | translate}}" ng-model="product.OrderQty" ng-change="addToOrder(product)">
+                        </label>
+                        <!-- ng-change="addToOrder(product)" -->
+                        <!-- input type="number" name="qty" --></div>
+                </div>
+            </div>
+        </form>
+    </ion-content>
+
+</ion-view>

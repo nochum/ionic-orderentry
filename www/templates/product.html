@@ -1,0 +1,178 @@
+<ion-view title="{{product.Product_Name__c}}">
+
+	<!--ion-header-bar class="bar-stable"> <button class="button icon ion-ios-email"></button> 
+		<h1 class="title">Product Name: {{product.Product_Name__c}}</h1> </ion-header-bar -->
+    
+    <div class="bar bar-header bar-light">
+        <h1 class="title">bar-light</h1>
+    </div>
+	<ion-content>
+		<!-- div class="product-name-outer">
+			<div name="product-name-inner">
+				<span class="product-name-label">{{product.Product_Name__c}}</span>
+			</div>
+		</div -->
+		<div class="product-details">
+			<section class="performance-facts">
+				<header class="performance-facts__header">
+					<h1 class="performance-facts__title">Nutrition Facts</h1>
+					<p>Serving Size {{product.Serving_Size__c}}
+						{{product.Serving_Size_Qualifier__c}}</p>
+				</header>
+				<table class="performance-facts__table">
+					<thead>
+						<tr>
+							<th colspan="3" class="small-info">
+								Amount Per Serving
+							</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th colspan="2">
+								<b>Calories</b>
+								{{product.Calories__c}}
+							</th>
+							<!-- td> Calories from Fat 130 </td -->
+						</tr>
+						<tr class="thick-row">
+							<td colspan="3" class="small-info">
+								<b>% Daily Value*</b>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2">
+								<b>Total Fat</b>
+								{{product.Total_Fat__c}}{{product.Total_Fat_Qualifier__c}}
+							</th>
+							<td>
+								<b>{{product.Total_Fat_Pct_RDA__c}}%</b>
+							</td>
+						</tr>
+						<tr>
+							<td class="blank-cell">
+							</td>
+							<th>
+								Saturated Fat
+								{{product.Saturated_Fat__c}}{{product.Saturated_Fat_Qualifier__c}}
+							</th>
+							<td>
+								<b>{{product.Saturated_Fat_Pct_RDA__c}}%</b>
+							</td>
+						</tr>
+						<tr>
+							<td class="blank-cell">
+							</td>
+							<th>
+								Trans Fat
+								{{product.Trans_Fat__c}}{{product.Trans_Fat_Qualifier__c}}
+							</th>
+							<td>
+								<b>{{product.Trans_Fat_Pct_RDA__c}}%</b>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2">
+								<b>Cholesterol</b>
+								{{product.Cholesterol__c}}{{product.Cholesterol_Qualifier__c}}
+							</th>
+							<td>
+								<b>{{product.Cholesterol_Pct_RDA__c}}%</b>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2">
+								<b>Sodium</b>
+								{{product.Sodium__c}}{{product.Sodium_Qualifier__c}}
+							</th>
+							<td>
+								<b>{{product.Sodium_Pct_RDA__c}}%</b>
+							</td>
+						</tr>
+						<tr>
+							<th colspan="2">
+								<b>Total Carbohydrate</b>
+								{{product.Total_Carbs__c}}{{product.Total_Carbs_Qualifier__c}}
+							</th>
+							<td>
+								<b>{{product.Total_Carbs_Pct_RDA__c}}%</b>
+							</td>
+						</tr>
+						<tr>
+							<td class="blank-cell">
+							</td>
+							<th>
+								Dietary Fiber
+								{{product.Fiber__c}}{{product.Fiber_Qualifier__c}}
+							</th>
+							<td>
+								<b></b>
+							</td>
+						</tr>
+						<tr>
+							<td class="blank-cell">
+							</td>
+							<th>
+								Sugars
+								{{product.Sugar_Carbs__c}}{{product.Sugar_Carbs_Qualifier__c}}
+							</th>
+							<td>
+							</td>
+						</tr>
+						<tr class="thick-end">
+							<th colspan="2">
+								<b>Protein</b>
+								{{product.Protein__c}}{{product.Protein_Qualifier__c}}
+							</th>
+							<td>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+            <div class="ingredients-div">
+				<span class="ingredients-label">INGREDIENTS:&nbsp;
+				</span>
+				<span class="ingredients-span">{{product.Ingredients__c}}</span>
+			</div>
+			<table class="allergens">
+				<caption>Allergens</caption>
+				<thead>
+					<tr>
+						<tr>
+							<th>Contains</th>
+							<th>Free From</th>
+						</tr>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<ul>
+								<li ng-repeat="a in allergens | filter:{Qualifier__c: 'Contains'}">{{a.Allergen_Name__c}}</li>
+							</ul>
+						</td>
+						<td>
+							<ul>
+								<li ng-repeat="a in allergens | filter:{Qualifier__c: 'Free From'}">{{a.Allergen_Name__c}}</li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="upc">
+				<img
+					src="http://www.barcode-generator.org/zint/api.php?bc_number=34&bc_data={{product.UPC_11__c}}"
+					alt="UPC Image" border="0" />
+			</div>
+        </div>
+	</ion-content>
+
+    <ion-footer-bar align-title="left" class="bar-assertive">
+        <h1 class="title">{{product.Product_Name__c}}</h1>
+        <div class="buttons" ng-click="emailProduct()">
+            <button class="button icon ion-ios-email"></button>
+        </div>
+    </ion-footer-bar>
+
+</ion-view>
